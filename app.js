@@ -23,9 +23,10 @@ app.get("/", (req, res) => {
 });
 
 app.get("/licenses", async (req, res) => {
-    console.log("asdasdasdsad")
+    console.log("asdasdasdsad");
     try {
         const licenses = await License.find();
+        console.log(licenses);
         res.json(licenses);
     } catch (error) {
         res.json({message: error});
