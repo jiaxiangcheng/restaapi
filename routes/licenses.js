@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const License = require("../models/License");
 
-// GET: Get all posts
 router.get("/", async (req, res) => {
     try {
         const licenses = await License.find();
@@ -12,7 +11,37 @@ router.get("/", async (req, res) => {
     }
 });
 
-// POST: Submit a post
+router.get("/total", async (req, res) => {
+    try {
+        const total = await License.countDocuments();
+        res.json({"total": total});
+    } catch (error) {
+        res.json({message: error});
+    }
+});
+
+router.get("/check", async (req, res) => {
+    try {
+        var userId = req.body.userId;
+        var machineId = req.body.machineId;
+        var count = 0;
+        console.log(req.body)
+        if (!req.body.hasOwnProperty("key")) {
+            count = await License.countDocuments({"userId": userId, "machineId": machineId});
+        } else {
+            var key = req.body.key;
+            count = await License.countDocuments({"userId": userId, "machineId": machineId, "key": key});
+        }
+        if (count > 0) {
+            res.json({"data": true})
+        } else {
+            res.json({"data": false});
+        }
+    } catch (error) {
+        res.json({message: error});
+    }
+});
+
 router.post("/", async (req, res) => {
     const license = new License({
         _id: req.body._id,
@@ -29,8 +58,6 @@ router.post("/", async (req, res) => {
     }
 });
 
-
-// GET: Get specific post
 router.get("/:licenseId", async (req, res) => {
     try {
         const license = await License.findById(req.params.licenseId);
@@ -41,7 +68,6 @@ router.get("/:licenseId", async (req, res) => {
 
 });
 
-// DELETE: Delete specific post
 router.delete("/:licenseId", async (req, res) => {
     try {
         const deletedLicense = await License.remove({_id: req.params.licenseId});
@@ -51,7 +77,6 @@ router.delete("/:licenseId", async (req, res) => {
     }
 });
 
-// PATCH: Update the post
 router.patch("/:licenseId", async (req, res) => {
     try {
         const updatedLicense = await License.updateOne(
