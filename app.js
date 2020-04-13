@@ -3,7 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const License = require("./models/License");
+// const License = require("./models/License");
 require("dotenv/config");   // To hide const values
 
 
@@ -15,13 +15,14 @@ app.use(bodyParser.json())  // every time we hit any request, we make sure body 
 // const licensesRoute = require("./routes/licenses");
 const availableKeysRoute = require("./routes/availablekeys");
 
-// app.use("/licenses", licensesRoute);
+app.use("/licenses", licensesRoute);
 app.use("/availablekeys", availableKeysRoute);
 
 app.get("/", (req, res) => {
     res.send("we are at home");
 });
 
+/*
 app.get("/licenses", async (req, res) => {
     console.log("asdasdasdsad");
     try {
@@ -32,10 +33,11 @@ app.get("/licenses", async (req, res) => {
         res.json({message: error});
     }
 });
+*/
 
 // Connect to DB
 mongoose.connect(
-    process.env.MONGODB_URI || process.env.DB_CONNECTION,
+    process.env.DB_CONNECTION,
     { useNewUrlParser: true },
     () => console.log("Conected to db!")
 );
