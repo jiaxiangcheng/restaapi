@@ -3,6 +3,7 @@ const router = express.Router();
 const License = require("../models/License");
 
 router.get("/", async (req, res) => {
+    console.log("asdasdasdsad")
     try {
         const licenses = await License.find();
         res.json(licenses);
