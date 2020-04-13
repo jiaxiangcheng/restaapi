@@ -5,8 +5,8 @@ const License = require("../models/License");
 router.get("/", async (req, res) => {
     console.log("asdasdasdsad")
     try {
-        console.log("dddddd")
-        // onst licenses = await License.find();
+        console.log(await License.find());
+        // const licenses = await License.find();
         res.json("dsadsadsad");
     } catch (error) {
         res.json({message: error});
