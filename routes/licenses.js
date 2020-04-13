@@ -7,7 +7,7 @@ router.get("/", async (req, res) => {
     try {
         console.log(await License.find());
         // const licenses = await License.find();
-        res.json("dsadsadsad");
+        res.json(await License.find());
     } catch (error) {
         res.json({message: error});
     }
