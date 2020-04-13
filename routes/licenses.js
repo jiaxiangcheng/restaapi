@@ -30,7 +30,7 @@ router.get("/check", async (req, res) => {
             count = await License.countDocuments({"userId": userId, "machineId": machineId});
         } else {
             var key = req.body.key;
-            count = await License.countDocuments({"userId": userId, "machineId": machineId, "key": key});
+            count = await License.countDocuments({"key": key});
         }
         if (count > 0) {
             res.json({"data": true})
