@@ -5,7 +5,7 @@ const Key = require("../models/Key");
 
 router.get("/", async (req, res) => {
     try {
-        const keys = await Key.find();
+        let keys = await Key.find();
         res.json(keys);
     } catch (error) {
         res.json({message: error});
@@ -31,7 +31,7 @@ router.post("/", async (req, res) => {
 
 router.get("/:keyId", async (req, res) => {
     try {
-        const key = await Key.findById(req.params.keyId);
+        let key = await Key.findById(req.params.keyId);
         res.json(key);
     } catch (error) {
         res.json({message: error});

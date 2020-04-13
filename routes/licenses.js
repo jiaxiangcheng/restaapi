@@ -3,9 +3,8 @@ const router = express.Router();
 const License = require("../models/License");
 
 router.get("/", async (req, res) => {
-    console.log("asdasdasdsad")
     try {
-        licenses = await License.find();
+        let licenses = await License.find();
         res.json(licenses);
     } catch (error) {
         res.json({message: error});
@@ -14,7 +13,7 @@ router.get("/", async (req, res) => {
 
 router.get("/total", async (req, res) => {
     try {
-        const total = await License.countDocuments();
+        let total = await License.countDocuments();
         res.json({"total": total});
     } catch (error) {
         res.json({message: error});
@@ -44,7 +43,7 @@ router.get("/check", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-    const license = new License({
+    let license = new License({
         _id: req.body._id,
         userId: req.body.userId,
         machineId: req.body.machineId,
@@ -52,7 +51,7 @@ router.post("/", async (req, res) => {
     });
 
     try {
-        const savedLicense = await license.save();
+        let savedLicense = await license.save();
         res.json(savedLicense);
     } catch (error) {
         res.json({message: err});
@@ -61,7 +60,7 @@ router.post("/", async (req, res) => {
 
 router.get("/:licenseId", async (req, res) => {
     try {
-        const license = await License.findById(req.params.licenseId);
+        let license = await License.findById(req.params.licenseId);
         res.json(license);
     } catch (error) {
         res.json({message: error});
@@ -71,7 +70,7 @@ router.get("/:licenseId", async (req, res) => {
 
 router.delete("/:licenseId", async (req, res) => {
     try {
-        const deletedLicense = await License.remove({_id: req.params.licenseId});
+        let deletedLicense = await License.remove({_id: req.params.licenseId});
         res.json(deletedLicense);
     } catch (error) {
         res.json({message: error});
@@ -80,7 +79,7 @@ router.delete("/:licenseId", async (req, res) => {
 
 router.patch("/:licenseId", async (req, res) => {
     try {
-        const updatedLicense = await License.updateOne(
+        let updatedLicense = await License.updateOne(
             {_id: req.params.licenseId},
             {$set: {key: req.body.key}
         });
