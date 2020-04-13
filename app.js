@@ -12,7 +12,7 @@ app.use(cors());
 app.use(bodyParser.json())  // every time we hit any request, we make sure body parser works
 
 // Import Routes
-const licensesRoute = require("./routes/licenses");
+// const licensesRoute = require("./routes/licenses");
 const availableKeysRoute = require("./routes/availablekeys");
 
 // app.use("/licenses", licensesRoute);
