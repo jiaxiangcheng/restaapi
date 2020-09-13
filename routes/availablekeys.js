@@ -28,7 +28,6 @@ router.post("/", async (req, res) => {
 });
 */
 
-
 router.get("/:keyId", async (req, res) => {
     try {
         let key = await Key.findById(req.params.keyId);

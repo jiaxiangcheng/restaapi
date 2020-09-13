@@ -3,26 +3,26 @@ const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-// const License = require("./models/License");
-require("dotenv/config");   // To hide const values
 
+require("dotenv/config");   // read data from .env
 
-// .use() function is Middlewares -> function that call if we go in specific url
+// 每一次我们接受到一个reques 都会从这个点运行所有以下的function
+
 app.use(cors());
-app.use(bodyParser.json())  // every time we hit any request, we make sure body parser works
+app.use(bodyParser.json())  // we make sure body parser works
 
 // Import Routes
 const licensesRoute = require("./routes/licenses");
 const availableKeysRoute = require("./routes/availablekeys");
-
 app.use("/licenses", licensesRoute);
 app.use("/availablekeys", availableKeysRoute);
 
 app.get("/", (req, res) => {
     res.send("we are at home");
 });
-
+ 
 /*
+const License = require("./models/License");
 app.get("/licenses", async (req, res) => {
     console.log("asdasdasdsad");
     try {
@@ -32,8 +32,7 @@ app.get("/licenses", async (req, res) => {
     } catch (error) {
         res.json({message: error});
     }
-});
-*/
+});*/
 
 // Connect to DB
 mongoose.connect(

@@ -25,7 +25,6 @@ router.get("/check", async (req, res) => {
         var userId = req.body.userId;
         var machineId = req.body.machineId;
         var count = 0;
-        console.log(req.body)
         if (!req.body.hasOwnProperty("key")) {
             count = await License.countDocuments({"userId": userId, "machineId": machineId});
         } else {
