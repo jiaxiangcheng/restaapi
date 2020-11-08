@@ -26,13 +26,38 @@ router.get("/check", async (req, res) => {
         var machineId = req.body.machineId;
         var count = 0;
         if (!req.body.hasOwnProperty("key")) {
+            // check if this user with userid and machineid is registered or not
             count = await License.countDocuments({"userId": userId, "machineId": machineId});
         } else {
+            // check if the key is already activated or not
             var key = req.body.key;
             count = await License.countDocuments({"key": key});
         }
         if (count > 0) {
-            res.json({"data": true})
+            res.json({"data": true});
+        } else {
+            res.json({"data": false});
+        }
+    } catch (error) {
+        res.json({message: error});
+    }
+});
+
+router.post("/check", async (req, res) => {
+    try {
+        var userId = req.body.userId;
+        var machineId = req.body.machineId;
+        var count = 0;
+        if (!req.body.hasOwnProperty("key")) {
+            // check if this user with userid and machineid is registered or not
+            count = await License.countDocuments({"userId": userId, "machineId": machineId});
+        } else {
+            // check if the key is already activated or not
+            var key = req.body.key;
+            count = await License.countDocuments({"key": key});
+        }
+        if (count > 0) {
+            res.json({"data": true});
         } else {
             res.json({"data": false});
         }
