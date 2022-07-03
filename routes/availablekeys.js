@@ -1,15 +1,14 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const Key = require("../models/Key");
-
+import Key from "../models/Key.js";
 
 router.get("/", async (req, res) => {
-    try {
-        let keys = await Key.find();
-        res.json(keys);
-    } catch (error) {
-        res.json({message: error});
-    }
+	try {
+		let keys = await Key.find();
+		res.json(keys);
+	} catch (error) {
+		res.json({ message: error });
+	}
 });
 
 /*
@@ -29,13 +28,12 @@ router.post("/", async (req, res) => {
 */
 
 router.get("/:keyId", async (req, res) => {
-    try {
-        let key = await Key.findById(req.params.keyId);
-        res.json(key);
-    } catch (error) {
-        res.json({message: error});
-    }
-
+	try {
+		let key = await Key.findById(req.params.keyId);
+		res.json(key);
+	} catch (error) {
+		res.json({ message: error });
+	}
 });
 
 /*
@@ -63,4 +61,4 @@ router.patch("/:keyId", async (req, res) => {
 });
 */
 
-module.exports = router;
+export default router;

@@ -1,14 +1,14 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const KeySchema = mongoose.Schema({
-    _id: {
-        type: Number,
-        required: true
-    },
-    key: {
-        type: String,
-        required: true
-    }
+	_id: {
+		type: Number,
+		required: true,
+	},
+	key: {
+		type: String,
+		required: true,
+	},
 });
 
-module.exports = mongoose.model("Key", KeySchema);
+export default mongoose.model("Key", KeySchema);
