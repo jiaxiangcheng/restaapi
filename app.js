@@ -13,7 +13,7 @@ app.use(bodyParser.json()); // we make sure body parser works
 
 // Creating Middlewares (Routes)
 import licensesRoute from "./routes/licenses.js";
-import availableKeysRoute from "./routes/availableKeys.js";
+import availableKeysRoute from "./routes/availablekeys.js";
 
 // Applying Middlewares
 app.use("/licenses", licensesRoute);
